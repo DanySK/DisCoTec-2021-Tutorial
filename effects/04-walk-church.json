@@ -1,7 +1,7 @@
 [
   {
     "type": "class it.unibo.alchemist.boundary.gui.effects.DrawShape",
-    "curIncarnation": "biochemistry",
+    "curIncarnation": "protelis",
     "mode": "FILL_ELLIPSE",
     "red": {
       "max": 255,
