@@ -7,4 +7,4 @@ buildscript {
 
 bootstrapRefreshVersionsAndDependencies()
 
-rootProject.name = "alchemist-primer"
+rootProject.name = "discotec-2021-alchemist-tutorial"
