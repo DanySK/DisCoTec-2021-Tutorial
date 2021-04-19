@@ -23,6 +23,7 @@ dependencies {
     // The version of Alchemist can be controlled by changing the version.properties file
     implementation("it.unibo.alchemist:alchemist:_")
     implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
+    implementation("it.unibo.alchemist:alchemist-incarnation-sapere:_")
     implementation("it.unibo.alchemist:alchemist-swingui:_")
 }
 
@@ -49,7 +50,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             group = alchemistGroup // This is for better organization when running ./gradlew tasks
             description = "Launches simulation ${it.nameWithoutExtension}" // Just documentation
             main = "it.unibo.alchemist.Alchemist" // The class to launch
-            classpath = sourceSets["main"].runtimeClasspath // The classpath to use
+            classpath = sourceSets.main.get().runtimeClasspath // The classpath to use
             // In case our simulation produces data, we write it in the following folder:
             val exportsDir = File("${projectDir.path}/build/exports/${it.nameWithoutExtension}")
             doFirst {
@@ -68,7 +69,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             } else {
                 // A graphics environment should be available, so load the effects for the UI from the "effects" folder
                 // Effects are expected to be named after the simulation file
-                args("-g", "effects/${it.nameWithoutExtension}.aes")
+                args("-g", "effects/${it.nameWithoutExtension}.json")
             }
             // This tells gradle that this task may modify the content of the export directory
             outputs.dir(exportsDir)
