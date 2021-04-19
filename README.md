@@ -59,7 +59,7 @@ and thus subsequent execution will be much faster.
 
 #### Using the graphical interface
 
-Press <kb>P</kb> to start the simulation.
+Press <kbd>P</kbd> to start the simulation.
 The available UI bindings are the following:
 
 | Key binding             | Active         | Effect                                                                |
