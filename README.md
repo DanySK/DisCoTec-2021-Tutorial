@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/359458176.svg)](https://zenodo.org/badge/latestdoi/359458176)
+[![CI](https://github.com/DanySK/DisCoTec-2021-Tutorial/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/DanySK/DisCoTec-2021-Tutorial/actions/workflows/build-and-deploy.yml)
+
 # Alchemist Tutorial presented at [DisCoTec 2021](https://www.discotec.org/2021/)
 
 This repository contains all examples presented at the Alchemist tutorial 
