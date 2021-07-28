@@ -20,23 +20,12 @@ sourceSets {
     }
 }
 
-fun onJava16AndAbove(body: () -> Unit) {
-    if (JavaVersion.current() >= JavaVersion.VERSION_16) {
-        body()
-    }
-}
-
 dependencies {
     // The version of Alchemist can be controlled by changing the version.properties file
     implementation("it.unibo.alchemist:alchemist:_")
     implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
     implementation("it.unibo.alchemist:alchemist-incarnation-sapere:_")
     implementation("it.unibo.alchemist:alchemist-swingui:_")
-    onJava16AndAbove {
-        runtimeOnly("com.google.inject:guice:_")
-        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext:_")
-        runtimeOnly("org.eclipse.xtext:org.eclipse.xtext.xbase:_")
-    }
 }
 
 val batch: String by project
@@ -61,9 +50,6 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         val task by tasks.register<JavaExec>("run${it.nameWithoutExtension.capitalize()}") {
             group = alchemistGroup // This is for better organization when running ./gradlew tasks
             description = "Launches simulation ${it.nameWithoutExtension}" // Just documentation
-            onJava16AndAbove {
-                jvmArgs("--illegal-access=permit")
-            }
             main = "it.unibo.alchemist.Alchemist" // The class to launch
             classpath = sourceSets.main.get().runtimeClasspath // The classpath to use
             // In case our simulation produces data, we write it in the following folder:
