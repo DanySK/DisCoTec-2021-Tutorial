@@ -8,9 +8,10 @@ held at [DisCoTec 2021](https://www.discotec.org/2021/).
 
 ## Prerequisites
 
-This project requires Java 11 or above correctly installed. It has been tested with Java 11 and Java 15,
-it is likely to work with newer versions too.
-If you have no Java installed, we recommend to install Java 11 from [AdoptOpenJDK](https://adoptopenjdk.net/)
+This project requires a Java version capable of executing Gradle.
+If Gradle can run, the project is pre-configured to download and execute on the latest supported java version.
+If you have no Java installed, we recommend installing the latest LTS Java from [AdoptOpenJDK](https://adoptopenjdk.net/)
+(unless a new LTS is out and Gradle does not yet support it).
 
 ## Instructions
 
