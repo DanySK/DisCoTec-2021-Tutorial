@@ -21,13 +21,11 @@ sourceSets {
 }
 
 dependencies {
-    // The version of Alchemist can be controlled by changing the version.properties file
-    implementation("it.unibo.alchemist:alchemist:_")
-    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:_")
-    implementation("it.unibo.alchemist:alchemist-incarnation-sapere:_")
-    implementation("it.unibo.alchemist:alchemist-swingui:_")
+    // The version and modules of Alchemist can be controlled by changing the gradle/libs.versions.toml file
+    implementation(libs.bundles.alchemist)
 }
 
+// Loaded from gradle.properties
 val batch: String by project
 val maxTime: String by project
 
