@@ -10,7 +10,7 @@ plugins {
 }
 
 multiJvm {
-    jvmVersionForCompilation.set(11)
+    jvmVersionForCompilation.set(latestJava)
 }
 
 repositories {
@@ -57,6 +57,11 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             description = "Launches simulation ${it.nameWithoutExtension}" // Just documentation
             mainClass.set("it.unibo.alchemist.Alchemist") // The class to launch
             classpath = sourceSets.main.get().runtimeClasspath // The classpath to use
+            // Let's use the most recent JVM
+            javaLauncher.set(
+                javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(multiJvm.latestJava)) }
+            )
+
             // In case our simulation produces data, we write it in the following folder:
             val exportsDir = File("${projectDir.path}/build/exports/${it.nameWithoutExtension}")
             doFirst {
