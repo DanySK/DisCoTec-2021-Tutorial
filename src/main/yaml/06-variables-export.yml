@@ -1,4 +1,5 @@
 incarnation: protelis
+
 variables:
   zoom: &zoom
     formula: 0.1 # Must be a valid Groovy snippet
@@ -15,14 +16,25 @@ variables:
   people_count: &people_count
     type: GeometricVariable # A variable scanning a space with geometric segmentation
     parameters: [300, 50, 500, 9] # default 300, minimum 50, maximum 100, 9 samples
+
 seeds: { simulation: *seed, scenario: *scenario_seed}
+
 export:
-  - time
-  - molecule: "default_module:default_program"
-    aggregators: [mean, max, min, variance, median] # From Apache's UnivariateStatistic
-    value-filter: onlyfinite # discards NaN and Infinity
+  type: CSVExporter
+  parameters:
+    fileNameRoot: "export"
+    exportPath: "data"
+    interval: 1.0
+  data:
+    - time
+    - molecule: "default_module:default_program"
+      aggregators: [mean, max, min, variance, median] # From Apache's UnivariateStatistic
+      value-filter: onlyfinite # discards NaN and Infinity
+
 environment: { type: ImageEnvironment, parameters: [*image_path, *zoom] }
+
 network-model: { type: ObstaclesBreakConnection, parameters: [50] }
+
 deployments:
   type: Rectangle
   parameters: [*people_count, 62, 15, 95, 200]
