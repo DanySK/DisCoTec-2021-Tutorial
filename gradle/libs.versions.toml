@@ -1,5 +1,5 @@
 [versions]
-alchemist = "12.2.8"
+alchemist = "12.2.9"
 
 [libraries]
 alchemist = { module = "it.unibo.alchemist:alchemist", version.ref = "alchemist" }
