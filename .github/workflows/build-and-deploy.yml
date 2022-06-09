@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build:
+  build:
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
@@ -59,3 +59,15 @@ jobs:
         run: |
           Remove-Item -Force c:\Users\runneradmin\.gradle\caches\modules-2\modules-2.lock
           Remove-Item -Force c:\Users\runneradmin\.gradle\caches\modules-2\gc.properties
+  ci-success:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    if: >-
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
+    steps:
+      - name: Verify that there were no failures
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
