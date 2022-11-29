@@ -46,7 +46,7 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Check
         shell: bash
-        run: ./gradlew runAll --parallel
+        run: ./gradlew runAll --parallel || ./gradlew runAll --parallel
       - name: Turn off the Gradle Daemon
         shell: bash
         run: ./gradlew --stop
