@@ -1,11 +1,4 @@
 pull_request_rules:
-  - name: Auto-rebase if appropriately labeled
-    conditions:
-      - label=auto-update-rebase
-      - -draft
-      - -conflict
-    actions:
-      rebase:
   - name: Auto-update with merge if appropriately labeled
     conditions:
       - label=auto-update-merge
@@ -15,7 +8,11 @@ pull_request_rules:
       update:
   - name: rebase-merge working updates
     conditions:
-      - author=renovate[bot]
+      - or: &authors_are_bots
+          - author=renovate[bot]
+          - author=dependabot[bot]
+      - "#review-threads-unresolved=0"
+      - "#commits-behind=0"
       - label=dependencies
       - -draft
       - -conflict
@@ -29,6 +26,6 @@ pull_request_rules:
       comment:
         message: |
           Hi @{{author}}! :wave:
-          I could not help but notice that this pull request has conflicts. :confounded:
+          This pull request has conflicts :confounded:
           Could you fix it? :wrench:
           Thank you! :pray:
