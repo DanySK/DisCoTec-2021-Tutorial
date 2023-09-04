@@ -27,7 +27,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout
-        uses: danysk/action-checkout@0.2.11
+        uses: danysk/action-checkout@0.2.12
       # Install the JDK
       - uses: actions/setup-java@v3
         with:
