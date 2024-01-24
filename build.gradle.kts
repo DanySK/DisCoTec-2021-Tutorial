@@ -1,3 +1,5 @@
+import java.awt.GraphicsEnvironment
+
 /*
  * DEFAULT GRADLE BUILD FOR ALCHEMIST SIMULATOR
  */
@@ -33,7 +35,6 @@ dependencies {
 }
 
 // Loaded from gradle.properties
-val batch: String by project
 val maxTime: String by project
 
 val alchemistGroup = "Run Alchemist"
@@ -47,7 +48,8 @@ val runAll by tasks.register<DefaultTask>("runAll") {
 /*
  * Scan the folder with the simulation files, and create a task for each one of them.
  */
-File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
+val isInCI = System.getenv("CI") == "true"
+File(rootProject.rootDir.path + "/src/main/yaml").listFiles().orEmpty()
     .filter { it.extension == "yml" } // pick all yml files in src/main/yaml
     .sortedBy { it.nameWithoutExtension } // sort them, we like reproducibility
     .forEach {
@@ -72,15 +74,29 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 }
             }
             // These are the program arguments
-            args("-y", it.absolutePath, "-e", "$exportsDir/${it.nameWithoutExtension}-${System.currentTimeMillis()}")
-            if (System.getenv("CI") == "true" || batch == "true") {
-                // If it is running in a Continuous Integration environment, use the "headless" mode of the simulator
-                // Namely, force the simulator not to use graphical output.
-                args("-hl", "-t", maxTime)
-            } else {
+            args("run", it.absolutePath)
+            // checks if the environment is headless
+            if (!(GraphicsEnvironment.isHeadless() || isInCI)) {
                 // A graphics environment should be available, so load the effects for the UI from the "effects" folder
                 // Effects are expected to be named after the simulation file
-                args("-g", "effects/${it.nameWithoutExtension}.json")
+                args(
+                    "--override",
+                    """
+                    monitors: 
+                        type: SwingGUI
+                        parameters: 
+                            graphics: effects/${it.nameWithoutExtension}.json
+                            failOnHeadless: true
+                    launcher: 
+                        parameters:
+                            auto-start: $isInCI
+                    """.trimIndent()
+                )
+            }
+            if (isInCI) {
+                // If it is running in a Continuous Integration environment,
+                // terminate the experiments after a few simulated seconds.
+                args("--override", "terminate: { type: AfterTime, parameters: $maxTime }")
             }
             // This tells gradle that this task may modify the content of the export directory
             outputs.dir(exportsDir)
