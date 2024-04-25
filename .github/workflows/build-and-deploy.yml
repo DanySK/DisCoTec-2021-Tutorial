@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: adopt
-          java-version: 8
+          java-version-file: .java-version
       - name: Configure the Windows Pagefile
         if: ${{ runner.os == 'Windows' }}
         uses: al-cheb/configure-pagefile-action@v1.4
