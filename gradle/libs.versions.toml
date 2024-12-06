@@ -11,6 +11,6 @@ alchemist-swingui = { module = "it.unibo.alchemist:alchemist-swingui", version.r
 alchemist = [ "alchemist", "alchemist-incarnation-protelis", "alchemist-incarnation-sapere", "alchemist-swingui" ]
 
 [plugins]
-kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.75.0" }
+kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.76.0" }
 multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "2.0.0" }
 taskTree = { id = "com.dorongold.task-tree", version = "4.0.0" }
