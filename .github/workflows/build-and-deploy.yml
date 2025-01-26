@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022, macos-14, ubuntu-22.04]
+        os: [windows-2022, macos-14, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
     env:
       TERM: dumb
@@ -63,7 +63,7 @@ jobs:
           Remove-Item -Force c:\Users\runneradmin\.gradle\caches\modules-2\modules-2.lock
           Remove-Item -Force c:\Users\runneradmin\.gradle\caches\modules-2\gc.properties
   ci-success:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     if: >-
