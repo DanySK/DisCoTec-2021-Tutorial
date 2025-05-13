@@ -12,5 +12,5 @@ alchemist = [ "alchemist", "alchemist-incarnation-protelis", "alchemist-incarnat
 
 [plugins]
 kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.85.0" }
-multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "3.4.1" }
+multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "3.4.2" }
 taskTree = { id = "com.dorongold.task-tree", version = "4.0.1" }
