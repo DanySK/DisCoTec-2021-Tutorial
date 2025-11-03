@@ -35,7 +35,7 @@ jobs:
           java-version-file: .java-version
       - name: Configure the Windows Pagefile
         if: ${{ runner.os == 'Windows' }}
-        uses: al-cheb/configure-pagefile-action@v1.4
+        uses: al-cheb/configure-pagefile-action@v1.5
       - name: Cache Gradle packages
         uses: actions/cache@v4
         with:
